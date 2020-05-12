@@ -12,7 +12,7 @@ resource "aws_api_gateway_method" "method" {
   request_parameters   = "${var.request_parameters}"
 
   request_models {
-    "application/json" = "${var.request_model}"
+    "application/json" = "Error"
   }
 }
 
@@ -33,7 +33,7 @@ resource "aws_api_gateway_integration" "integration" {
   depends_on = ["aws_api_gateway_method.method"]
 }
 
-resource "aws_api_gateway_method_response" "200" {
+resource "aws_api_gateway_method_response" "response" {
   rest_api_id = "${var.api_id}"
   resource_id = "${var.api_resource_id}"
   http_method = "${aws_api_gateway_method.method.http_method}"
@@ -50,7 +50,7 @@ resource "aws_api_gateway_method_response" "200" {
   depends_on = ["aws_api_gateway_method.method"]
 }
 
-resource "aws_api_gateway_method_response" "400" {
+resource "aws_api_gateway_method_response" "failed" {
   rest_api_id = "${var.api_id}"
   resource_id = "${var.api_resource_id}"
   http_method = "${aws_api_gateway_method.method.http_method}"
@@ -67,24 +67,24 @@ resource "aws_api_gateway_method_response" "400" {
   depends_on = ["aws_api_gateway_method.method"]
 }
 
-resource "aws_api_gateway_integration_response" "200" {
+resource "aws_api_gateway_integration_response" "response" {
   rest_api_id = "${var.api_id}"
   resource_id = "${var.api_resource_id}"
   http_method = "${aws_api_gateway_method.method.http_method}"
-  status_code = "${aws_api_gateway_method_response.200.status_code}"
+  status_code = "${aws_api_gateway_method_response.response.status_code}"
 
   response_parameters {
     "method.response.header.Access-Control-Allow-Origin" = "'*'"
   }
 
-  depends_on = ["aws_api_gateway_method.method", "aws_api_gateway_method_response.200"]
+  depends_on = ["aws_api_gateway_method.method", "aws_api_gateway_method_response.response"]
 }
 
-resource "aws_api_gateway_integration_response" "400" {
+resource "aws_api_gateway_integration_response" "failed" {
   rest_api_id = "${var.api_id}"
   resource_id = "${var.api_resource_id}"
   http_method = "${aws_api_gateway_method.method.http_method}"
-  status_code = "${aws_api_gateway_method_response.400.status_code}"
+  status_code = "${aws_api_gateway_method_response.failed.status_code}"
 
   selection_pattern = ".+"
 
@@ -101,5 +101,5 @@ resource "aws_api_gateway_integration_response" "400" {
 EOF
   }
 
-  depends_on = ["aws_api_gateway_method.method", "aws_api_gateway_method_response.400"]
+  depends_on = ["aws_api_gateway_method.method", "aws_api_gateway_method_response.failed"]
 }
