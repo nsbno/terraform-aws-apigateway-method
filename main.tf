@@ -61,7 +61,7 @@ resource "aws_api_gateway_method_response" "failed" {
   }
 
   response_models = {
-    "application/json" = "Error"
+    application/json = "Error"
   }
 
 }
