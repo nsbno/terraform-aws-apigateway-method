@@ -12,7 +12,7 @@ resource "aws_api_gateway_method" "method" {
   request_parameters   = "${var.request_parameters}"
 
   request_models {
-    "application/json" = "Error"
+    application/json = "Error"
   }
 }
 
