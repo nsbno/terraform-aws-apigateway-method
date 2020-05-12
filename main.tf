@@ -26,8 +26,8 @@ resource "aws_api_gateway_integration" "integration" {
   passthrough_behavior    = "WHEN_NO_TEMPLATES"
   uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:lambda:path/2015-03-31/functions/${var.lambda}/invocations"
 
-  request_templates {
-    "application/json" = "${var.request_template}"
+  request_templates = {
+    application/json = "${var.request_template}"
   }
 
   depends_on = ["aws_api_gateway_method.method"]
@@ -43,8 +43,8 @@ resource "aws_api_gateway_method_response" "response" {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
 
-  response_models {
-    "application/json" = "${var.response_model}"
+  response_models = {
+    application/json = "${var.response_model}"
   }
 
   depends_on = ["aws_api_gateway_method.method"]
