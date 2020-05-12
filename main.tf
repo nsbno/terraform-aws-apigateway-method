@@ -60,11 +60,10 @@ resource "aws_api_gateway_method_response" "failed" {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
 
-  response_models {
+  response_models = {
     "application/json" = "Error"
   }
 
-  depends_on = ["aws_api_gateway_method.method"]
 }
 
 resource "aws_api_gateway_integration_response" "response" {
