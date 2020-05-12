@@ -39,7 +39,7 @@ resource "aws_api_gateway_method_response" "response" {
   http_method = "${aws_api_gateway_method.method.http_method}"
   status_code = "200"
 
-  response_parameters {
+  response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
 
@@ -56,7 +56,7 @@ resource "aws_api_gateway_method_response" "failed" {
   http_method = "${aws_api_gateway_method.method.http_method}"
   status_code = "400"
 
-  response_parameters {
+  response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
 
@@ -87,7 +87,7 @@ resource "aws_api_gateway_integration_response" "failed" {
 
   selection_pattern = ".+"
 
-  response_parameters {
+  response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = "'*'"
   }
 
