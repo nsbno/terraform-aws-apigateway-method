@@ -35,6 +35,7 @@ variable "api_key_required" {
 
 variable "request_template" {
   type = "string"
+  default = "{}"
 }
 
 variable "request_model" {
@@ -44,7 +45,7 @@ variable "request_model" {
 
 variable "response_model" {
   type    = "string"
-  default = "Empty"
+  default = "#set($inputRoot = $input.path('$')){}"
 }
 
 variable "request_validator_id" {
@@ -55,5 +56,13 @@ variable "request_validator_id" {
 variable "request_parameters" {
   type    = "map"
   default = {}
+}
+
+variable "error_template" {
+  default = <<EOF
+#set ($errorMessageObj = $util.parseJson($input.path('$.errorMessage')) {
+  "message" : "$errorMessageObj.message"
+}
+EOF
 }
 
