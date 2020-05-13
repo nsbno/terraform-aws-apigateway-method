@@ -72,7 +72,7 @@ resource "aws_api_gateway_integration_response" "response" {
   http_method = "${aws_api_gateway_method.method.http_method}"
   status_code = "${aws_api_gateway_method_response.response.status_code}"
 
-  response_parameters {
+  response_parameters = {
     method.response.header.Access-Control-Allow-Origin = "'*'"
   }
 
