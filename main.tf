@@ -73,7 +73,7 @@ resource "aws_api_gateway_integration_response" "response" {
   status_code = "${aws_api_gateway_method_response.response.status_code}"
 
   response_parameters {
-    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+    method.response.header.Access-Control-Allow-Origin = "'*'"
   }
 
   depends_on = ["aws_api_gateway_method.method", "aws_api_gateway_method_response.response"]
@@ -88,7 +88,7 @@ resource "aws_api_gateway_integration_response" "failed" {
   selection_pattern = ".+"
 
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+    method.response.header.Access-Control-Allow-Origin = "'*'"
   }
 
   response_templates = {
