@@ -53,7 +53,9 @@ resource "aws_api_gateway_method_response" "failed" {
   resource_id = "${var.api_resource_id}"
   http_method = "${aws_api_gateway_method.method.http_method}"
   status_code = "400"
-
+  response_templates = {
+    "application/json" = "${var.error_template}"
+  }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
