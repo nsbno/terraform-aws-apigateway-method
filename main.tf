@@ -11,7 +11,7 @@ resource "aws_api_gateway_method" "method" {
   request_validator_id = "${var.request_validator_id}"
   request_parameters   = "${var.request_parameters}"
 
-  request_models = { "application/json" = "Empty" }
+  request_models = { "application/json" = "${var.request_model}" }
 }
 
 resource "aws_api_gateway_integration" "integration" {
