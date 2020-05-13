@@ -58,9 +58,7 @@ resource "aws_api_gateway_method_response" "failed" {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
 
-  response_models = {
-    application/json = "Error"
-  }
+request_models = { "application/json" = "Empty" }
 
 }
 
