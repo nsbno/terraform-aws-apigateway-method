@@ -58,8 +58,6 @@ resource "aws_api_gateway_method_response" "failed" {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
 
-request_models = { "application/json" = "Empty" }
-
 }
 
 resource "aws_api_gateway_integration_response" "response" {
