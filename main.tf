@@ -39,9 +39,7 @@ resource "aws_api_gateway_method_response" "response" {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
 
-  response_models = {
-    application/json = "${var.response_model}"
-  }
+  response_models = { "application/json" = "${var.response_model}" }
 
   depends_on = ["aws_api_gateway_method.method"]
 }
