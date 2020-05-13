@@ -45,7 +45,7 @@ variable "request_model" {
 
 variable "response_model" {
   type    = "string"
-  default = "#set($inputRoot = $input.path('$')){}"
+  default = "Empty"
 }
 
 variable "request_validator_id" {
