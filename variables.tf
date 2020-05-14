@@ -30,7 +30,7 @@ variable "authorization_scopes" {
 
 variable "api_key_required" {
   type = "string"
-  default = ""
+  default = "false"
 }
 
 variable "request_template" {
